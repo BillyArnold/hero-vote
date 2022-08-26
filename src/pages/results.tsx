@@ -23,6 +23,9 @@ const Results: NextPage = () => {
 
         <section className="max-w-full w-[600px] pt-10 md:pt-24">
           <Result/>
+          <Result/>
+          <Result/>
+          <Result/>
         </section>
 
 

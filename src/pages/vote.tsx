@@ -1,10 +1,20 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useState, PropsWithChildren } from "react";
 import axios from 'axios';
 
+export interface Character {
+  character: {
+    name: string;
+    image: {
+      screen_large_url: string;
+    };
+  }
+};
+
 const Vote: NextPage = () => {
-  const [votingChar, setVotingChar] = useState({0: {name: "default", image: {screen_large_url: ""}}, 1: {name: "default", image: {screen_large_url: ""}}});
+  const [firstChar, setFirstChar] = useState({name: "default", image: {screen_large_url: ""}});
+  const [secondChar, setSecondChar] = useState({name: "default", image: {screen_large_url: ""}});
   useEffect(() => {
     const firstID = Math.floor(Math.random() * 152988) + 1253;;
     const secondID = Math.floor(Math.random() * 152988) + 1253;
@@ -16,15 +26,14 @@ const Vote: NextPage = () => {
       }
     })
     .then(function(response) {
-      
-      console.log(response);
-
-      setVotingChar(response.data.results);
+      setFirstChar(response.data.results[0]);
+      setSecondChar(response.data.results[1]);
     })
     .catch(function(error) {
       console.log(error);
     });
     
+
   }, []);
 
   return (
@@ -36,22 +45,14 @@ const Vote: NextPage = () => {
       </Head>
 
       <div className="vote-contain fixed h-screen w-full flex flex-col">
-          <div className={"h-[50vh] w-full relative bg-[url('https://comicvine.gamespot.com/a/uploads/screen_kubrick/0/9241/522079-0000.jpg')]"}>
-              <div className="cover-bottom-left h-full w-full top-0 left-0 bottom-0 right-0"></div> 
-              <h2 className="text-xl md:text-3xl leading-normal font-bold text-gray-700 absolute bottom-4 left-4">{votingChar[0].name}</h2>
-          </div>
-          <TopVote character={votingChar[0]} />
-          <BottomVote character={votingChar[1]} />
-          <div className={"h-[50vh] w-full relative bg-[url('https://comicvine.gamespot.com/a/uploads/screen_kubrick/0/9241/522079-0000.jpg')]"}>
-          <div className="cover-top-right h-full w-full top-0 left-0 bottom-0 right-0"></div>
-            <h2 className="text-xl md:text-3xl leading-normal font-bold text-gray-700 absolute top-4 right-4">{votingChar[1].name}</h2>
-          </div>
+          <TopVote character={firstChar} />
+          <BottomVote character={secondChar} />
       </div>
     </>
   );
 };
 
-const TopVote:FC = (props) => {
+const TopVote:FC<Character> = (props: Character) => {
   return(
     <div className={"h-[50vh] w-full relative bg-[url('" + props.character.image.screen_large_url + "')]"}>
               <div className="cover-bottom-left h-full w-full top-0 left-0 bottom-0 right-0"></div> 
@@ -60,7 +61,7 @@ const TopVote:FC = (props) => {
   )
 }
 
-const BottomVote:FC = (props) => {
+const BottomVote:FC<Character> = (props: Character) => {
   return(
     <div className={"h-[50vh] w-full relative bg-[url('" + props.character.image.screen_large_url + "')]"}>
               <div className="cover-bottom-left h-full w-full top-0 left-0 bottom-0 right-0"></div> 
