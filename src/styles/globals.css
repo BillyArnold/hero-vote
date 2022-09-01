@@ -19,6 +19,18 @@ html, body {
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#d8b4fe",endColorstr="#1a3490",GradientType=1);
 }
 
+.hero:hover .cover-bottom-left {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.hero:hover h2 {
+    color: white !important;
+}
+
+.hero:hover .cover-top-right {
+    background: rgba(0, 0, 0, 0.4);
+}
+
 .cover-top-right {
     background: rgb(216,180,254);
     background: -moz-linear-gradient(225deg, rgba(216,180,254,1) 0%, rgba(26,52,144,0) 100%);

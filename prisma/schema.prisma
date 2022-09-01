@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
     provider = "prisma-client-js"
 }
@@ -12,4 +9,13 @@ datasource db {
 
 model Example {
     id String @id @default(cuid())
+}
+
+model Votes {
+    id         Int     @id @unique @default(autoincrement())
+    name       String?
+    image      String
+    votedFor   Int
+    totalVotes Int
+    winPercent Float
 }
