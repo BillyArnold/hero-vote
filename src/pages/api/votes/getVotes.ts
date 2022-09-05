@@ -11,7 +11,7 @@ import {
 const queryClient = new QueryClient();
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const Votes = await prisma.votes.findMany({
+  const Votes: object | null = await prisma.votes.findMany({
     orderBy: [
       {
         winPercent: "desc",
@@ -25,7 +25,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (Votes) {
     res.status(200).json(Votes);
   } else {
-    res.status(500).json("Error with DB request");
+    res.status(500).send({ error: "failed to fetch data" });
   }
 };
 

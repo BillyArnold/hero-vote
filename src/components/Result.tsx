@@ -1,17 +1,22 @@
-import type { NextPage } from "next";
-import Head from "next/head";
-import Link from "next/link";
-import { FC } from 'react';
+import { FC, } from 'react';
 
-const Result: FC = () => {
+export interface Hero {
+  character: {
+    image: string | undefined,
+    name: string | undefined,
+    winPercent: number
+  },
+}
+
+const Result: FC<Hero> = (hero : Hero) => {
   return (
     <>
       <div className="w-full shadow-lg bg-white rounded-lg p-4 flex items-center mb-4">
-        <div className="rounded-full h-20 w-20 bg-indigo-200 mr-4 shrink-0"></div>
+        <div className="rounded-full h-20 w-20 bg-indigo-200 mr-4 shrink-0 relative"><img src={hero.character.image} className="rounded-full absolute w-full h-full left-0 top-0 object-cover"/></div>
  
-        <p className="grow text-left font-bold text-gray-700 pr-4">Hero Name Hero Name Hero Name</p>
+        <p className="grow text-left font-bold text-gray-700 pr-4">{hero.character.name}</p>
 
-        <p className="font-bold text-gray-700">98%</p>
+        <p className="font-bold text-gray-700">{hero.character.winPercent.toFixed(2)}%</p>
 
       </div>
     </>

@@ -9,6 +9,7 @@ html, body {
     background: -webkit-linear-gradient(162deg, rgba(255,0,0,1) 0%, rgba(26,52,144,1) 100%);
     background: linear-gradient(162deg, rgba(255,0,0,1) 0%, rgba(26,52,144,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ff0000",endColorstr="#1a3490",GradientType=1);
+    background-attachment: fixed;
 }
 
 .cover-bottom-left {

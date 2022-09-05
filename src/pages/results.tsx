@@ -3,11 +3,29 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import Result from "../components/Result";
-
+import { useQuery } from '@tanstack/react-query';
+import getVotes from "../services/prisma/getVotes";
 
 const Results: NextPage = () => {
+
+  const { isLoading, error, data } = useQuery(['voteData'], () => getVotes());
+
+  if (isLoading) {
+    console.log("loading");
+  }
+
+  if(error) {
+    console.log(error);
+  }
+
+  if(data) {
+    console.log(data);
+  }
+
+
   return (
     <>
+    
       <Head>
         <title>The Hero Vote - Results</title>
         <meta name="description" content="Vote for your favourite hero" />
@@ -22,16 +40,14 @@ const Results: NextPage = () => {
         
 
         <section className="max-w-full w-[600px] pt-10 md:pt-24">
-          <Result/>
-          <Result/>
-          <Result/>
-          <Result/>
+          {data?.map(character => (
+            <Result key={character.id} character={character}/>
+          ))}
         </section>
 
 
       </main>
 
-      
     </>
   );
 };

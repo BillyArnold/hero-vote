@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { FC, useEffect, useState } from "react";
 import { getVotingOptions } from "../utils/getRandomHero";
-import { useQuery, useQueries, QueryClient, useQueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { useQuery, QueryClient } from '@tanstack/react-query';
 import { getGetHerobyID } from "../services/getHerobyID";
 import axios from "axios";
 import Image from "next/image";
@@ -17,8 +17,8 @@ interface Character {
   opponent: number | undefined,
 }
 
-const queryClient = new QueryClient()
 
+const queryClient = new QueryClient()
 
 const Vote: NextPage = () => {
   const [firstHero, setFirstHero] = useState<number | undefined>();
@@ -34,7 +34,6 @@ const Vote: NextPage = () => {
 
   return (
     <>
-     <QueryClientProvider client={queryClient}>
       <Head>
         <title>The Hero Vote - Voting</title>
         <meta name="description" content="Vote for your favourite hero" />
@@ -48,7 +47,6 @@ const Vote: NextPage = () => {
       {firstHero && <TopVote character={firstHero} opponent={secondHero} />}
       {secondHero && <BottomVote character={secondHero} opponent={firstHero}/>}
       </div> 
-      </QueryClientProvider>
     </>
   );
 };
@@ -128,7 +126,7 @@ const TopVote:FC<Character> = (props: Character) => {
 
 const BottomVote:FC<Character> = (props: Character) => {
   const { isLoading, error, data } = useQuery(['heroDataSecond'], () => getGetHerobyID(props.character));
-  const { isLoading : isLoadingOpponent, error : isErrorOpponent, data : dataOpponent } = useQuery(['opponentData'], () => getGetHerobyID(props.opponent));
+  const { isLoading : isLoadingOpponent, error : isErrorOpponent, data : dataOpponent } = useQuery(['opponentDataSecond'], () => getGetHerobyID(props.opponent));
 
   const handleVote = () => {
 
