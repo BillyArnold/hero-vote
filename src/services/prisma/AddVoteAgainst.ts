@@ -1,5 +1,3 @@
-import { Console } from "console";
-
 const AddVoteAgainst = async (
   hid: number | undefined,
   name: string,

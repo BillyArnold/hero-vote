@@ -51,8 +51,8 @@ const Vote: NextPage = () => {
       </Head>
 
       <div className="vote-contain fixed h-screen w-full flex flex-col md:flex-row">
-        <div className="fixed z-10 bottom-10 right-10">
-          <Link href="/results"><a className="font-extrabold bg-gray-700 text-purple-300 text-xl md:text-2xl border-purple-300 border-2 p-2 md:p-4">RESULTS</a></Link>
+        <div className="fixed z-10 bottom-4 md:bottom-10 right-4 md:right-10">
+          <Link href="/results"><a className="rounded-2xl font-extrabold bg-gray-700 text-purple-300 text-md md:text-md border-purple-300 border-2 p-2 md:p-3">RESULTS</a></Link>
         </div>
       {firstHero && <TopVote character={firstHero} opponent={secondHero} onVoteHandler={onVoteHandler}/>}
       {secondHero && <BottomVote character={secondHero} opponent={firstHero} onVoteHandler={onVoteHandler}/>}

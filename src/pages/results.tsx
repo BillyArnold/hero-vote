@@ -36,6 +36,12 @@ const Results: NextPage = () => {
         <p className="text-xl md:text-3xl leading-normal font-bold text-gray-700">See the public results of the hero vote with their win percentage</p>
         
 
+        <div className="fixed z-10 bottom-4 md:bottom-10 right-4 md:right-10">
+        <Link href="/vote"><a className="rounded-2xl font-extrabold bg-gray-700 text-purple-300 text-md md:text-md border-purple-300 border-2 p-2 md:p-3">VOTE</a></Link>
+        </div>
+        
+        
+
         <section className="max-w-full w-[600px] pt-10 md:pt-24">
           {data?.map(character => (
             <Result key={character.id} character={character}/>

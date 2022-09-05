@@ -17,7 +17,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         winPercent: "desc",
       },
       {
-        name: "asc",
+        totalVotes: "desc",
       },
     ],
   });

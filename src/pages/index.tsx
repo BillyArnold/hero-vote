@@ -17,9 +17,8 @@ const Home: NextPage = () => {
           The <span className="text-purple-300">Best</span> Superhero
         </h1>
         <p className="text-xl md:text-3xl leading-normal font-bold text-gray-700">The definitive vote - Click/tap on your favourite hero</p>
-        <p className="text-xl md:text-3xl leading-normal font-bold text-gray-700">Vote 5 times to see the result</p>
         <br/>
-        <Link href="/vote"><a className="font-extrabold text-purple-300 text-xl md:text-2xl border-purple-300 border-2 p-2 md:p-4">BEGIN VOTING</a></Link>
+        <Link href="/vote"><a className="rounded-2xl font-extrabold bg-gray-700 text-purple-300 text-md md:text-md border-purple-300 border-2 p-2 md:p-3">BEGIN VOTING</a></Link>
       </main>
     </>
   );
