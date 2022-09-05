@@ -1,12 +1,7 @@
 // src/pages/api/examples.ts
 import type { NextApiRequest, NextApiResponse } from "next";
 import { prisma } from "../../../server/db/client";
-import {
-  useQuery,
-  QueryClient,
-  useQueryClient,
-  QueryClientProvider,
-} from "@tanstack/react-query";
+import { QueryClient } from "@tanstack/react-query";
 
 const queryClient = new QueryClient();
 
