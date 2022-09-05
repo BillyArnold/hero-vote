@@ -11,15 +11,12 @@ const Results: NextPage = () => {
   const { isLoading, error, data } = useQuery(['voteData'], () => getVotes());
 
   if (isLoading) {
-    console.log("loading");
   }
 
   if(error) {
-    console.log(error);
   }
 
   if(data) {
-    console.log(data);
   }
 
 

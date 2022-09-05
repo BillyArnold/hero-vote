@@ -24,12 +24,22 @@ const Vote: NextPage = () => {
   const [firstHero, setFirstHero] = useState<number | undefined>();
   const [secondHero, setSecondHero] = useState<number | undefined>();
 
-
-  useEffect(() => {
+  const resetVotingOptions = () => {
     const [first, second] = getVotingOptions();
     setFirstHero(first);
     setSecondHero(second); 
+  }
+
+  useEffect(() => {
+    resetVotingOptions();
   }, []);
+
+  const onVoteHandler = () => {
+    console.log("voteHandled");
+    resetVotingOptions();
+    console.log("newFirst", firstHero);
+    console.log("newSecond", secondHero);
+  }
   
 
   return (
@@ -44,8 +54,8 @@ const Vote: NextPage = () => {
         <div className="fixed z-10 bottom-10 right-10">
           <Link href="/results"><a className="font-extrabold bg-gray-700 text-purple-300 text-xl md:text-2xl border-purple-300 border-2 p-2 md:p-4">RESULTS</a></Link>
         </div>
-      {firstHero && <TopVote character={firstHero} opponent={secondHero} />}
-      {secondHero && <BottomVote character={secondHero} opponent={firstHero}/>}
+      {firstHero && <TopVote character={firstHero} opponent={secondHero} onVoteHandler={onVoteHandler}/>}
+      {secondHero && <BottomVote character={secondHero} opponent={firstHero} onVoteHandler={onVoteHandler}/>}
       </div> 
     </>
   );
@@ -58,8 +68,8 @@ const Vote: NextPage = () => {
 
 const TopVote:FC<Character> = (props: Character) => {
   
-  const { isLoading, error, data } = useQuery(['heroData'], () => getGetHerobyID(props.character));
-  const { isLoading : isLoadingOpponent, error : isErrorOpponent, data : dataOpponent } = useQuery(['opponentData'], () => getGetHerobyID(props.opponent));
+  const { isLoading, error, data } = useQuery([props.character], () => getGetHerobyID(props.character));
+  const { isLoading : isLoadingOpponent, error : isErrorOpponent, data : dataOpponent } = useQuery([props.opponent], () => getGetHerobyID(props.opponent));
 
   const router = useRouter();
   
@@ -76,8 +86,11 @@ const TopVote:FC<Character> = (props: Character) => {
       addVoteAgainst(props.opponent, encodedNameO, encodedImageO );
     }
     
-    queryClient.invalidateQueries(['heroData']);
-    router.reload();
+    queryClient.invalidateQueries([props.character, props.opponent]);
+    //router.reload();
+    props.onVoteHandler();
+
+    
   }
   
   if (isLoading) {
@@ -125,8 +138,8 @@ const TopVote:FC<Character> = (props: Character) => {
 
 
 const BottomVote:FC<Character> = (props: Character) => {
-  const { isLoading, error, data } = useQuery(['heroDataSecond'], () => getGetHerobyID(props.character));
-  const { isLoading : isLoadingOpponent, error : isErrorOpponent, data : dataOpponent } = useQuery(['opponentDataSecond'], () => getGetHerobyID(props.opponent));
+  const { isLoading, error, data } = useQuery([props.character], () => getGetHerobyID(props.character));
+  const { isLoading : isLoadingOpponent, error : isErrorOpponent, data : dataOpponent } = useQuery([props.opponent], () => getGetHerobyID(props.opponent));
 
   const handleVote = () => {
 
@@ -141,8 +154,9 @@ const BottomVote:FC<Character> = (props: Character) => {
       addVoteAgainst(props.opponent, encodedNameO, encodedImageO );
     }
     
-    queryClient.invalidateQueries(['heroDataSecond']);
-    router.reload();
+    queryClient.invalidateQueries([props.character, props.opponent]);
+    //router.reload();
+    props.onVoteHandler();
   }
 
   const router = useRouter();  
