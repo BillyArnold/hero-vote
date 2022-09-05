@@ -10,6 +10,7 @@ import { Dna } from  'react-loader-spinner'
 import { useRouter } from "next/router";
 import addVoteFor from '../services/prisma/AddVoteFor';
 import addVoteAgainst from '../services/prisma/AddVoteAgainst';
+import Link from 'next/link';
 
 interface Character {
   character: number | undefined,
@@ -41,6 +42,9 @@ const Vote: NextPage = () => {
       </Head>
 
       <div className="vote-contain fixed h-screen w-full flex flex-col md:flex-row">
+        <div className="fixed z-10 bottom-10 right-10">
+          <Link href="/results"><a className="font-extrabold bg-gray-700 text-purple-300 text-xl md:text-2xl border-purple-300 border-2 p-2 md:p-4">RESULTS</a></Link>
+        </div>
       {firstHero && <TopVote character={firstHero} opponent={secondHero} />}
       {secondHero && <BottomVote character={secondHero} opponent={firstHero}/>}
       </div> 
