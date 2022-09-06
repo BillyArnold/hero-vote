@@ -49,8 +49,8 @@ export const getRandomHero: (notThisOne?: number) => any = (notThisOne) => {
 };
 
 export const getVotingOptions = () => {
-  const firstId: number = getRandomHero();
-  const secondId: number = getRandomHero(firstId);
+  const firstId = getRandomHero();
+  const secondId = getRandomHero(firstId);
 
   return [firstId, secondId];
 };
