@@ -136,7 +136,7 @@ const TopVote: FC<Character> = (props) => {
     return (
       <>
         <div
-          className="h-[100vh] w-full md:w-[50%] relative hero transition hover:cursor-pointer"
+          className="h-[50vh] md:h-[100vh] w-full md:w-[50%] relative hero transition hover:cursor-pointer"
           onClick={handleVote}
         >
           <img
@@ -221,7 +221,7 @@ const BottomVote: FC<Character> = (props) => {
     return (
       <>
         <div
-          className="h-[100vh]  w-full md:w-[50%]  relative hero transition hover:cursor-pointer"
+          className="h-[50vh] md:h-[100vh]  w-full md:w-[50%]  relative hero transition hover:cursor-pointer"
           onClick={handleVote}
         >
           <img
