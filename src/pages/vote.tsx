@@ -41,7 +41,7 @@ const Vote: NextPage = () => {
       <Head>
         <title>The Hero Vote - Voting</title>
         <meta name="description" content="Vote for your favourite hero" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/herofavicon.png" />
       </Head>
 
       <div className="vote-contain fixed h-screen w-full flex flex-col md:flex-row">

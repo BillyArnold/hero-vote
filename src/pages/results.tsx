@@ -23,7 +23,7 @@ const Results: NextPage = () => {
       <Head>
         <title>The Hero Vote - Results</title>
         <meta name="description" content="Vote for your favourite hero" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/herofavicon.png" />
       </Head>
 
       <main className="container mx-auto flex flex-col items-center pt-20 md:pt-40 text-center min-h-screen p-4 text-gray-700">
