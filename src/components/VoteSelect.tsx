@@ -9,7 +9,7 @@ import { Character } from "../pages/vote";
 
 const queryClient = new QueryClient();
 
-const TopVote: FC<Character> = (props) => {
+const VoteSelect: FC<Character> = (props) => {
   const { isLoading, error, data } = useQuery<
     any,
     Error,
@@ -24,8 +24,6 @@ const TopVote: FC<Character> = (props) => {
     getGetHerobyID(props.opponent)
   );
 
-  const router = useRouter();
-
   const handleVote = () => {
     const encodedName = encodeURIComponent(data.name);
     const encodedImage = encodeURIComponent(data.images.lg);
@@ -39,15 +37,18 @@ const TopVote: FC<Character> = (props) => {
     }
 
     queryClient.invalidateQueries([props.character, props.opponent]);
+
     props.onVoteHandler();
   };
+
+  const router = useRouter();
 
   if (isLoading) {
     return (
       <>
         <div className="h-[100vh] w-full md:w-[50%] relative">
           <div className="cover-bottom-left h-full w-full top-0 left-0 bottom-0 right-0">
-            <div className="absolute bottom-4 left-4">
+            <div className="absolute top-4 right-4">
               <Dna
                 visible={true}
                 height="80"
@@ -74,15 +75,15 @@ const TopVote: FC<Character> = (props) => {
     return (
       <>
         <div
-          className="h-[50vh] md:h-[100vh] w-full md:w-[50%] relative hero transition hover:cursor-pointer"
+          className="h-[50vh] md:h-[100vh]  w-full md:w-[50%]  relative hero transition hover:cursor-pointer"
           onClick={handleVote}
         >
           <img
             src={data.images.lg}
             className="absolute object-cover h-full w-full  top-0 left-0 bottom-0 right-0 z-[-1]"
           />
-          <div className="cover-bottom-left h-full w-full top-0 left-0 bottom-0 right-0 transition"></div>
-          <h2 className="text-xl md:text-3xl leading-normal font-bold text-gray-700 absolute bottom-4 left-4">
+          <div className="cover-top-right h-full w-full top-0 left-0 bottom-0 right-0 transition"></div>
+          <h2 className="text-xl md:text-3xl leading-normal font-bold text-gray-700 absolute top-4 right-4">
             {data.name}
           </h2>
         </div>
@@ -93,4 +94,4 @@ const TopVote: FC<Character> = (props) => {
   return null;
 };
 
-export default TopVote;
+export default VoteSelect;

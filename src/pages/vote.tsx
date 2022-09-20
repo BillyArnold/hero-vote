@@ -9,8 +9,7 @@ import { useRouter } from "next/router";
 import addVoteFor from "../services/prisma/AddVoteFor";
 import addVoteAgainst from "../services/prisma/AddVoteAgainst";
 import Link from "next/link";
-import BottomVote from "../components/BottomVote";
-import TopVote from "../components/TopVote";
+import VoteSelect from "../components/VoteSelect";
 
 export interface Character {
   character?: number;
@@ -55,14 +54,14 @@ const Vote: NextPage = () => {
           </Link>
         </div>
         {firstHero && (
-          <TopVote
+          <VoteSelect
             character={firstHero}
             opponent={secondHero}
             onVoteHandler={onVoteHandler}
           />
         )}
         {secondHero && (
-          <BottomVote
+          <VoteSelect
             character={secondHero}
             opponent={firstHero}
             onVoteHandler={onVoteHandler}
