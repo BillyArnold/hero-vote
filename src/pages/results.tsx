@@ -1,23 +1,9 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
-import Result from "../components/Result";
-import { useQuery } from "@tanstack/react-query";
-import getVotes from "../services/prisma/getVotes";
-import { Hero } from "../components/Result";
+import ResultList from "../components/ResultList";
 
 const Results: NextPage = () => {
-  const { isLoading, error, data } = useQuery(["voteData"], () => getVotes());
-
-  if (isLoading) {
-  }
-
-  if (error) {
-  }
-
-  if (data) {
-  }
-
   return (
     <>
       <Head>
@@ -44,9 +30,7 @@ const Results: NextPage = () => {
         </div>
 
         <section className="max-w-full w-[600px] pt-10 md:pt-24">
-          {data?.map((character: Hero["character"]) => (
-            <Result key={character.id} character={character} />
-          ))}
+          <ResultList />
         </section>
       </main>
     </>
