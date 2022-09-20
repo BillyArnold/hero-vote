@@ -9,13 +9,15 @@ const ResultList: FC = () => {
   const { isLoading, error, data } = useQuery(["voteData"], () => getVotes());
 
   if (isLoading) {
-    <Dna
-      visible={true}
-      height="80"
-      width="80"
-      ariaLabel="dna-loading"
-      wrapperClass="dna-wrapper"
-    />;
+    return (
+      <Dna
+        visible={true}
+        height="80"
+        width="80"
+        ariaLabel="dna-loading"
+        wrapperClass="dna-wrapper"
+      />
+    );
   }
 
   if (error) {
