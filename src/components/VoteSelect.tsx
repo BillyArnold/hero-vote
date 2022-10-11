@@ -16,6 +16,7 @@ const VoteSelect: FC<Character> = (props) => {
     any,
     (number | undefined)[]
   >([props.character], () => getGetHerobyID(props.character));
+
   const {
     isLoading: isLoadingOpponent,
     error: isErrorOpponent,
